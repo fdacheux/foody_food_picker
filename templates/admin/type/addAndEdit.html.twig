@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin category :{% endblock %}
+
+{% block myTitle %}{% if isModification %}Edit category{% else %}Add new category {{ type.fieldName }}{% endif %}{% endblock %}
+
+{% block body %}
+
+{{form_start(form)}}
+    {{form_widget(form)}}
+    <input type="submit" value="Submit" class="btn btn-primary ms-2 mt-2" >
+{{form_end(form)}}
+
+{% endblock %}

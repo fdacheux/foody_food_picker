@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Food list :{% endblock %}
+
+{% block myTitle %}List of food 
+    {% if isCalories %} under 50 calories 
+    {% elseif isCarbohydrates %} under 5 carbohydrates {% endif %} 
+    :
+{% endblock %}
+
+{% block body %}
+
+<div class="d-flex gap-2 ms-2 mb-2">
+    <a class="my-2 btn btn-secondary shadow-sm " href="{{path('food_list')}}">All</a>
+    <a class="my-2 btn btn-secondary shadow-sm " href="{{path('food_by_calories', {"calories": 50})}}">Display food under 50 calories for 100 g</a>
+    <a class="my-2 btn btn-secondary shadow-sm " href="{{path('food_by_carbohydrates', {"carbohydrates": 5})}}">Display food under 5 carbohydrates for 100 g</a>
+    </div>
+<div class="row">
+{% for food in foodList %}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card border-primary mb-3 mx-auto" style="max-width: 20rem;">
+            <div class="card-header text-center">
+                <img class="perso_imgFood card-img-top" src="{{asset('images/food/' ~ food.image)}}" alt="">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title text-center pb-2 mx-3 border-bottom border-primary">{{ food.name }}</h3>
+                <p class="card-text">
+                    <h4 class="text-center">Price (kilo) : {{ food.price }} €</h4>
+                    <h4 class="text-center">Category : {{ food.type.fieldName }}</h4>
+                    <table class="table text-center">
+                        <tr class="table-primary">
+                            <td>Properties</td>
+                            <td>Value (100g)</td>
+                        </tr>
+                        <tr>
+                            <td>Calories</td>
+                            <td>{{food.calories}}</td>
+                        </tr>
+                        <tr>
+                            <td>Carbohydrates</td>
+                            <td>{{food.carbohydrates}}</td>
+                        </tr>
+                        <tr>
+                            <td>Proteins</td>
+                            <td>{{food.protein}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fats</td>
+                            <td>{{food.fats}}</td>
+                        </tr>
+                    </table>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

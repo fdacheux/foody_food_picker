@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {% if isModification %}Modifications :
+  {% else %}Creation :
+  {% endif %}
+{% endblock %}
+
+{% block myTitle %} 
+  {% if isModification %}Edit {{ foodItem.name }} 
+  {% else %}Add new food 
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  {{form_start(foodForm)}}
+  <div class="row ms-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+      {% if isModification %}<img style="width: 25%" src="{{asset('images/food/' ~ foodItem.image)}}" alt="{{ foodItem.name }}" class="shadow-sm rounded">{% endif %}
+      <div>{{form_row(foodForm.imageFile, {"label": "Image"})}}</div>
+      <div>{{form_row(foodForm.name, {"attr": {"class": "text-danger"}, "label": "Food name"})}}</div>
+      <div>{{form_row(foodForm.type)}}</div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">{{form_widget(foodForm)}}</div>
+  </div>
+  
+    
+    <input type="submit" class="btn btn-primary ms-2 mt-2" value="Save">
+  {{form_end(foodForm)}}
+{% endblock %}

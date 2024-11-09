@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block myTitle %}Site registration :{% endblock %}
+
+{% block body %}
+<div class="mx-2 my-2">
+    {{ form_start(form) }}
+        {{ form_row(form.username, {
+            "attr": {
+                "placeholder": "Enter your login"}, 
+            "label": "Your login"} ) }}
+        {{ form_row(form.password, {
+            "attr": {
+                "placeholder": "Enter your password"}, 
+            "label": "Your password"}) }}
+        {{ form_row(form.passwordConfirm, {
+            "attr": {
+                "placeholder": "Confirm your password"}, 
+            "label": "Password confirmation"
+        })}}
+        {{ form_widget(form) }}
+        <input type="submit" value="Submit" class="btn btn-primary mt-2">
+    {{ form_end(form) }}
+</div>
+{% endblock %}

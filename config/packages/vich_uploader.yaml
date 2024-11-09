@@ -1,0 +1,15 @@
+vich_uploader:
+  db_driver: orm
+
+  metadata:
+    type: attribute
+
+  mappings:
+    food_image:
+      uri_prefix: /images/food
+      upload_destination: "%kernel.project_dir%/public/images/food"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+    type_image:
+      uri_prefix: /images/type
+      upload_destination: "%kernel.project_dir%/public/images/type"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

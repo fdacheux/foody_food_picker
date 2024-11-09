@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin category :{% endblock %}
+
+{% block myTitle %}Categories administration page{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success mx-2" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+
+    <a href="{{path('add_type')}}" class="btn btn-success mb-2 ms-2">Add</a>
+    <table class="table table-striped mx-2">
+        <tr class="table-primary">
+            <th>Image</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+        {% for type in types %}
+            <tr>
+                <td><img class="perso_imgFoodAdmin" src="{{asset('images/type/' ~ type.image)}}" alt="{{ type.fieldName }}"></td>
+                <td><strong>{{ type.fieldName }}</strong></td>
+                <td>
+                    <a href="{{path('edit_type', {"id": type.id })}}" class="btn btn-secondary">Edit</a>
+                    
+                    <form onSubmit="return confirm('Do you really want to delete this category ?')" class="d-inline" data: {turbo: false} method="post" action="{{path('delete_type', {"id": type.id })}}">
+                        <input type="hidden" name="_method" value="deletion"/>
+                        <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ type.id) }}">
+                        <input type="submit" value="Delete" class="btn btn-danger"/>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
